@@ -1,19 +1,20 @@
+import React from "react";
 import { Image, StyleSheet, ViewStyle } from "react-native";
 
 import { View } from "../Themed";
 
-type AvatarProps = {
+interface AvatarProps {
     uri: string;
     size: number;
     style?: ViewStyle;
     status?: boolean;
-};
+}
 
-export function Avatar(props: AvatarProps) {
+export const Avatar: React.FC<AvatarProps> = ({ uri, size, style, status }) => {
     return (
-        <View style={[styles.avatar, props.style]}>
-            <Image source={{ uri: props.uri }} style={{ width: props.size, height: props.size, borderRadius: props.size }} />
-            {props.status && <View style={styles.badge} />}
+        <View style={[styles.avatar, { width: size, height: size }, style]}>
+            <Image source={{ uri }} style={{ width: size, height: size, borderRadius: size }} />
+            {status && <View style={styles.badge} />}
         </View>
     );
 }

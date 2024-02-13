@@ -69,29 +69,18 @@ const calls = [
 export default function CallScreen() {
   return (
     <View style={styles.container}>
-      <FlatList 
-        data={calls}
-        renderItem={({ item }) => (
-          <Call user={{
-            id: '',
-            name: '',
-            image: '',
-            status: undefined
-          }} lastCall={{
-            id: '',
-            user: {
-              id: '',
-              name: '',
-              image: '',
-              status: undefined
-            },
-            content: '',
-            createdAt: ''
-          }} size={0} />
-        )}
-        inverted
-      />
-    </View>
+            <FlatList 
+                data={calls}
+                renderItem={({ item }) => (
+                    <Call 
+                        user={item.user}
+                        lastCall={item.call} 
+                        size={50} 
+                    />
+                )}
+                inverted
+            />
+        </View>
   );
 }
 

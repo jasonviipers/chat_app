@@ -14,9 +14,10 @@ interface CallProps {
 
 export function Call(props: CallProps) {
     if(!props.user || !props.lastCall) return null
+    const isUserOnline = props.user.status !== undefined;
     return (
         <Pressable style={[styles.container]}>
-            <Avatar uri={props.user.image} size={props.size} status={props.user.status !== undefined} />
+            <Avatar uri={props.user.image} size={props.size} status={isUserOnline} />
             <View style={styles.containerList}>
                 <View style={styles.row} >
                     <Text style={styles.name}>{props.user.name}</Text>
