@@ -25,6 +25,7 @@ const IconNames: IconNamesProps = {
   send: IconsNames.SendIcon,
   edit: IconsNames.EditIcon,
   video: IconsNames.VideoIcon,
+  people: IconsNames.PeopleIcon,
 };
 
 interface IconProps extends SvgProps {

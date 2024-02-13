@@ -8,6 +8,7 @@ import { HomeIcon } from "./home-icon";
 import { MenuIcon } from "./menu-icon";
 import { MessageIcon } from "./message-icon";
 import { MicIcon } from "./mic-icon";
+import { PeopleIcon } from "./people-icon";
 import { PlusIcon } from "./plus-icon";
 import { ProfileIcon } from "./profile-icon";
 import { SearchIcon } from "./search-icon";
@@ -34,4 +35,5 @@ export default {
     SendIcon,
     EditIcon,
     VideoIcon,
+    PeopleIcon,
 };

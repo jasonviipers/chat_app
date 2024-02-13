@@ -14,6 +14,7 @@ type Tab = {
 const tabs: Tab[] = [
   { name: "chats", icon: "message", title: "Chats" },
   { name: "calls", icon: "video", title: "Calls" },
+  { name: "people", icon: "people", title: "People" },
 ];
 export default function TabLayout() {
   const colorScheme = useColorScheme();
