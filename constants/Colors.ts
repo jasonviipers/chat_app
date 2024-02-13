@@ -1,9 +1,11 @@
-const tintColorLight = '#2f95dc';
+import { Dimensions } from "react-native";
+
+const tintColorLight = '#6B3AF6';
 const tintColorDark = '#fff';
 
 export default {
   light: {
-    text: '#000',
+    text: '#1A1F28',
     background: '#fff',
     tint: tintColorLight,
     tabIconDefault: '#ccc',
@@ -11,9 +13,17 @@ export default {
   },
   dark: {
     text: '#fff',
-    background: '#000',
+    background: '#1A1F28',
     tint: tintColorDark,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
   },
+};
+
+export const sizes = {
+  width: Dimensions.get('window').width,
+  height: Dimensions.get('window').height,
+  headerHeight: 50,
+  padding: 25,
+  borderRadius: 6,
 };

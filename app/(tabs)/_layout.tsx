@@ -1,59 +1,96 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Tabs } from 'expo-router';
+import {  StyleSheet, useColorScheme } from 'react-native';
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { Text, View } from '@/components/Themed';
+import { Icons } from '@/components/Icons';
+import Theme, { sizes } from '@/constants/Colors';
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+type Tab = {
+  name: string;
+  icon: string;
+  title: string;
+};
 
+const tabs: Tab[] = [
+  { name: "chats", icon: "message", title: "Chats" },
+  { name: "calls", icon: "video", title: "Calls" },
+];
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+      <Tabs
+        screenOptions={
+          {
+            tabBarActiveTintColor: Theme[colorScheme ?? "light"].background,
+            headerShown: false,
+            tabBarStyle: {
+             
+            },
+          }
+        }>
+        {tabs.map((tab) => (
+          <Tabs.Screen
+            key={tab.name}
+            name={tab.name}
+            options={{
+              title: tab.title,
+              tabBarIcon: ({ focused, size }) => (
+                <View
+                  style={[
+                    styles.Tabcontainer,
+                    {
+                      backgroundColor: focused
+                        ? Theme[colorScheme ?? "light"].tint
+                        : Theme[colorScheme ?? "light"].background,
+                      shadowColor: Theme[colorScheme ?? "light"].text,
+                    },
+                  ]}
+                >
+                  <Icons
+                    name={tab.icon}
+                    color={
+                      focused
+                        ? Theme[colorScheme ?? "light"].background
+                        : Theme[colorScheme ?? "light"].text
+                    }
+                    size={size}
                   />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </Tabs>
+                  
+                </View>
+              ),
+              tabBarLabel: ({ focused }) => (
+                <Text
+                  style={[
+                    styles.tabLabel,
+                    {
+                      color: focused
+                        ? Theme[colorScheme ?? "light"].tint
+                        : Theme[colorScheme ?? "light"].text,
+                    },
+                  ]}
+                >
+                  {tab.title}
+                </Text>
+              ),
+            }}
+          />
+        ))}
+
+      </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  Tabcontainer: {
+    width: sizes.width * 0.12,
+    height: 45,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  tabLabel: {
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+});
